@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Solid Mesh Studio 3D | Hub de Fabricação Digital &amp; Prototipagem Avançada</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Orbitron & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Orbitron:wght@500;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Custom Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyber: {
+              950: '#070A0F',
+              900: '#0A0E14',
+              850: '#0D121D',
+              800: '#111722',
+              700: '#1A2332',
+              600: '#253245',
+            },
+            neon: {
+              cyan: '#00D9E8',
+              glow: '#2DE1F0',
+              blue: '#0077FE',
+            },
+            metal: {
+              100: '#F1F4F7',
+              200: '#E2E8F0',
+              300: '#CBD5E1',
+              400: '#94A3B8',
+              500: '#64748B',
+            }
+          },
+          fontFamily: {
+            display: ['Orbitron', 'sans-serif'],
+            tech: ['Space Grotesk', 'sans-serif'],
+            sans: ['Inter', 'sans-serif']
+          },
+          boxShadow: {
+            'neon-sm': '0 0 10px rgba(0, 217, 232, 0.35)',
+            'neon': '0 0 20px rgba(0, 217, 232, 0.45)',
+            'neon-lg': '0 0 35px rgba(0, 217, 232, 0.6)',
+            'metal': 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    }
+  </script>
+<!-- BEGIN: Custom Global Styles -->
+<style data-purpose="cyber-background-grid">
+    .cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(0, 217, 232, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 217, 232, 0.04) 1px, transparent 1px);
+    }
+    .radar-circle {
+      background: radial-gradient(circle, rgba(0,217,232,0.12) 0%, rgba(0,217,232,0) 70%);
+    }
+    .metal-gradient {
+      background: linear-gradient(135deg, #FFFFFF 0%, #B8C2CC 50%, #7E8C9B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .neon-text-glow {
+      text-shadow: 0 0 14px rgba(0, 217, 232, 0.65);
+    }
+    .laser-scanner {
+      animation: scanLaser 3s ease-in-out infinite alternate;
+    }
+    @keyframes scanLaser {
+      0% { top: 0%; opacity: 0.8; }
+      100% { top: 96%; opacity: 0.4; }
+    }
+  </style>
+<!-- END: Custom Global Styles -->
+</head>
+<body class="bg-cyber-900 text-metal-300 font-sans antialiased selection:bg-neon-cyan selection:text-cyber-950 overflow-x-hidden cyber-grid">
+<!-- BEGIN: MainNavbar -->
+<header class="sticky top-0 z-50 backdrop-blur-md bg-cyber-950/85 border-b border-cyber-700/60 transition-all duration-300">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+<!-- Brand Logo -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="relative w-11 h-11 rounded-lg overflow-hidden border border-neon-cyan/40 p-0.5 group-hover:border-neon-cyan transition-colors shadow-neon-sm">
+<img alt="Solid Mesh Studio Logo" class="w-full h-full object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALDRqRIwXDqNbLhxQmDYCcxc4Y4vpn19ltZjTcfTKPCaBBOp4WCDQ4Oy_-O4gx1gzDePqxR8TwIO8GKdFmJfjZVSkbTeV5whmadQV1xG2KY7zR6qhg9QTr8cb0dOIM97oow__9ABxGRuYpsds-hC_wFhIDc-eyzkhA0_Dw3vcFAAo02M21MKORqkUeEJcDyUcCeqHZzsC4-Kz59vPfmouZ4huI1hHxMofj0JGAipglWoxvjMAMuMUr"/>
+</div>
+<div class="flex flex-col">
+<span class="font-display font-black tracking-wider text-base text-white group-hover:text-neon-cyan transition-colors">
+            SOLID MESH
+          </span>
+<span class="text-[10px] tracking-widest text-metal-400 font-tech uppercase -mt-1 font-semibold">
+            STUDIO 3D • LAB
+          </span>
+</div>
+</a>
+<!-- Desktop Navigation Menu -->
+<nav class="hidden lg:flex items-center gap-8 text-sm font-medium">
+<a class="text-metal-300 hover:text-neon-cyan transition-colors" href="#modelos">Modelos 3D</a>
+<a class="text-metal-300 hover:text-neon-cyan transition-colors" href="#orcamento">Orçamento Instantâneo</a>
+<a class="text-metal-300 hover:text-neon-cyan transition-colors" href="#diferenciais">Materiais &amp; Engenharia</a>
+<a class="text-metal-300 hover:text-neon-cyan transition-colors" href="#contato">Fale com Projetista</a>
+<a class="text-metal-300 hover:text-neon-cyan transition-colors" href="#sobre">Sobre Nós</a>
+</nav>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-xs font-semibold uppercase tracking-wider text-metal-200 border border-cyber-600 rounded-md hover:border-metal-400 hover:bg-cyber-800 transition" href="#orcamento">
+          Calculadora STL
+        </a>
+<a class="relative inline-flex items-center justify-center px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-cyber-950 bg-neon-cyan rounded-md hover:bg-neon-glow transition shadow-neon-sm hover:shadow-neon" href="#orcamento">
+<span>Peça seu Orçamento</span>
+</a>
+</div>
+</div>
+</header>
+<!-- END: MainNavbar -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="relative pt-12 pb-20 lg:pt-20 lg:pb-32 overflow-hidden">
+<!-- Background Technical Radar Overlay (Inspirado no visual da imagem 1) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] pointer-events-none opacity-20 radar-circle flex items-center justify-center">
+<div class="w-[700px] h-[700px] rounded-full border border-neon-cyan/30 flex items-center justify-center">
+<div class="w-[500px] h-[500px] rounded-full border border-dashed border-neon-cyan/25 flex items-center justify-center">
+<div class="w-[280px] h-[280px] rounded-full border border-neon-cyan/20"></div>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Column: High-Impact Typography -->
+<div class="lg:col-span-7 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-neon-cyan/30 bg-cyber-850/80 backdrop-blur">
+<span class="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
+<span class="text-xs font-tech font-bold text-neon-cyan tracking-wider uppercase">Fabricação Digital &amp; Manufatura 4.0</span>
+</div>
+<h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-black uppercase text-white leading-none tracking-tight">
+              BEM-VINDOS AO <br/>
+<span class="metal-gradient">SOLID MESH STUDIO,</span><br/>
+<span class="text-neon-cyan neon-text-glow">SEU NOVO HUB CRIATIVO!</span>
+</h1>
+<p class="text-lg sm:text-xl text-metal-300 max-w-2xl font-light leading-relaxed">
+              Nossa paixão é pegar as suas ideias e dar a elas <strong class="text-white font-medium">peso, volume e função</strong>. Do conceito digital até a peça final pronta para uso industrial ou colecionável.
+            </p>
+<!-- Technical Specification Badges (Estilo Imagem de Referência) -->
+<div class="grid grid-cols-3 gap-3 pt-2 max-w-lg">
+<div class="p-3 bg-cyber-850/90 border border-cyber-700/80 rounded-lg">
+<span class="block text-[10px] uppercase font-tech text-metal-400">Precisão Dimensional</span>
+<span class="text-sm font-display font-bold text-neon-cyan">±0.05 mm</span>
+</div>
+<div class="p-3 bg-cyber-850/90 border border-cyber-700/80 rounded-lg">
+<span class="block text-[10px] uppercase font-tech text-metal-400">Extensões Nativas</span>
+<span class="text-sm font-display font-bold text-white">.STL .OBJ .3MF</span>
+</div>
+<div class="p-3 bg-cyber-850/90 border border-cyber-700/80 rounded-lg">
+<span class="block text-[10px] uppercase font-tech text-metal-400">Despacho Ágil</span>
+<span class="text-sm font-display font-bold text-neon-cyan">24h Express</span>
+</div>
+</div>
+<!-- CTA Actions -->
+<div class="pt-4 flex flex-wrap items-center gap-4">
+<a class="px-8 py-4 bg-neon-cyan hover:bg-neon-glow text-cyber-950 font-display font-bold text-sm uppercase tracking-wider rounded-lg shadow-neon transition duration-200 flex items-center gap-3" href="#orcamento">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Peça seu Orçamento
+              </a>
+<a class="px-7 py-4 bg-cyber-800/80 hover:bg-cyber-700 text-white font-tech font-bold text-sm uppercase tracking-wider rounded-lg border border-cyber-600 transition duration-200" href="#modelos">
+                Explorar Modelos 3D
+              </a>
+</div>
+<p class="text-xs text-metal-400 font-tech">
+              * Setup acelerado, envio de cotação formal em até <span class="text-neon-cyan">15 minutos</span> por WhatsApp ou e-mail.
+            </p>
+</div>
+<!-- Right Column: 3D Visualization Canvas Interactive Unit -->
+<div class="lg:col-span-5 relative">
+<div class="relative w-full aspect-square max-w-[500px] mx-auto rounded-2xl bg-cyber-850 border border-cyber-700/80 p-3 shadow-2xl overflow-hidden group">
+<!-- Holographic Header Line -->
+<div class="flex items-center justify-between pb-3 border-b border-cyber-700/60 px-2 text-xs font-tech">
+<span class="text-neon-cyan flex items-center gap-1.5 font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-ping"></span>
+                  VIEWPORT INTERATIVO: HUB_CORE_MK4
+                </span>
+<span class="text-metal-400 font-mono text-[11px]">360° ORBIT ENABLED</span>
+</div>
+<!-- Canvas 3D element -->
+<div class="relative w-full h-[360px] flex items-center justify-center cursor-grab active:cursor-grabbing" id="hero-canvas-container">
+<canvas class="w-full h-full block rounded-lg" id="heroMeshCanvas"></canvas>
+<div class="absolute bottom-3 left-3 bg-cyber-950/80 backdrop-blur px-3 py-1.5 rounded text-[11px] font-tech text-metal-300 border border-cyber-700 pointer-events-none">
+                  🖱️ Arraste para orbitar • Role para zoom
+                </div>
+</div>
+<!-- Quick Material Switchers in Hero -->
+<div class="pt-3 border-t border-cyber-700/60 flex items-center justify-between px-2">
+<span class="text-[11px] font-tech text-metal-400 uppercase">Material de Amostra:</span>
+<div class="flex items-center gap-1.5" id="hero-material-switches">
+<button class="w-5 h-5 rounded-full bg-neon-cyan border-2 border-white shadow-neon-sm hover:scale-110 transition" data-color="#00D9E8" title="Ciano Neon"></button>
+<button class="w-5 h-5 rounded-full bg-slate-200 border border-cyber-600 hover:scale-110 transition" data-color="#E2E8F0" title="Aço Escovado"></button>
+<button class="w-5 h-5 rounded-full bg-orange-600 border border-cyber-600 hover:scale-110 transition" data-color="#FF5722" title="PLA Tough Orange"></button>
+<button class="w-5 h-5 rounded-full bg-slate-800 border border-cyber-600 hover:scale-110 transition" data-color="#1E293B" title="Nylon Carbono"></button>
+</div>
+</div>
+</div>
+<!-- Floating Micro Card -->
+<div class="absolute -bottom-6 -left-6 hidden sm:block p-4 rounded-xl bg-cyber-950/90 border border-neon-cyan/40 backdrop-blur-md shadow-neon-sm max-w-[210px]">
+<div class="text-[10px] font-tech text-neon-cyan font-semibold uppercase">Calibração de Camada</div>
+<div class="text-xl font-display font-black text-white mt-0.5">20 a 100 μm</div>
+<div class="text-[11px] text-metal-400 mt-1">Acabamento ultra-liso sem linhas aparentes.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: ValuePropositionSection -->
+<section class="py-20 bg-cyber-950 border-y border-cyber-800 relative" id="sobre">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<!-- Header Section -->
+<div class="max-w-3xl mb-16">
+<div class="flex items-center gap-2 text-neon-cyan text-xs font-tech font-bold uppercase tracking-widest mb-2">
+<span>[ ENGENHARIA DE MATERIAIS &amp; DESIGN ]</span>
+</div>
+<h2 class="text-3xl sm:text-4xl font-display font-black text-white uppercase tracking-tight">
+            A FABRICAÇÃO DO FUTURO É PESSOAL E ELA <span class="text-neon-cyan">COMEÇA AQUI</span>.
+          </h2>
+<p class="mt-4 text-metal-300 text-base sm:text-lg leading-relaxed">
+            Unimos o design técnico detalhado com a versatilidade da impressão 3D para materializar tudo, de protótipos precisos a peças finais incríveis.
+          </p>
+<div class="mt-6 inline-block text-xl sm:text-2xl font-display font-extrabold text-white border-b-2 border-neon-cyan pb-1">
+            Bora transformar o digital em real?
+          </div>
+</div>
+<!-- Differential Cards Grid (Inspirado no layout modular da Imagem 1) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1 -->
+<div class="bg-cyber-850/80 p-6 rounded-xl border border-cyber-700/70 hover:border-neon-cyan/60 transition group hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan mb-5 group-hover:scale-110 transition">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="font-display font-bold text-white text-base tracking-wide uppercase mb-2 group-hover:text-neon-cyan transition-colors">
+              Precisão em Resina &amp; FDM
+            </h3>
+<p class="text-sm text-metal-400 leading-relaxed">
+              Equipamentos industriais de ponta com tolerâncias rigorosas para montagens mecânicas e miniaturas de altíssima definição.
+            </p>
+</div>
+<!-- Card 2 -->
+<div class="bg-cyber-850/80 p-6 rounded-xl border border-cyber-700/70 hover:border-neon-cyan/60 transition group hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan mb-5 group-hover:scale-110 transition">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="font-display font-bold text-white text-base tracking-wide uppercase mb-2 group-hover:text-neon-cyan transition-colors">
+              Engenharia Reversa
+            </h3>
+<p class="text-sm text-metal-400 leading-relaxed">
+              Digitalização e refatoração de componentes mecânicos quebrados ou descontinuados com reforço estrutural em CAD.
+            </p>
+</div>
+<!-- Card 3 -->
+<div class="bg-cyber-850/80 p-6 rounded-xl border border-cyber-700/70 hover:border-neon-cyan/60 transition group hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan mb-5 group-hover:scale-110 transition">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="font-display font-bold text-white text-base tracking-wide uppercase mb-2 group-hover:text-neon-cyan transition-colors">
+              Acabamento Industrial
+            </h3>
+<p class="text-sm text-metal-400 leading-relaxed">
+              Tratamento químico com vaporização, lixamento técnico, primer automotivo e pintura com cores personalizadas.
+            </p>
+</div>
+<!-- Card 4 -->
+<div class="bg-cyber-850/80 p-6 rounded-xl border border-cyber-700/70 hover:border-neon-cyan/60 transition group hover:-translate-y-1 duration-300">
+<div class="w-12 h-12 rounded-lg bg-neon-cyan/10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan mb-5 group-hover:scale-110 transition">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="font-display font-bold text-white text-base tracking-wide uppercase mb-2 group-hover:text-neon-cyan transition-colors">
+              Prototipagem 24h
+            </h3>
+<p class="text-sm text-metal-400 leading-relaxed">
+              Parque produtivo ativo 24/7 para entregas de protótipos funcionais com validação dimensional em tempo recorde.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ValuePropositionSection -->
+<!-- BEGIN: InteractiveGallerySection -->
+<section class="py-20 bg-cyber-900 relative" id="modelos">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<span class="text-neon-cyan text-xs font-tech font-bold uppercase tracking-wider">[ REPOSITÓRIO &amp; SHOWCASE ]</span>
+<h2 class="text-3xl sm:text-4xl font-display font-black text-white uppercase tracking-tight mt-1">
+              GALERIA DE MODELOS <span class="metal-gradient">3D INTERATIVA</span>
+</h2>
+<p class="text-metal-400 text-sm mt-2 max-w-xl">
+              Selecione uma peça para inspecionar parâmetros técnicos, materiais recomendados ou carregá-la no simulador de custos.
+            </p>
+</div>
+<!-- Category Filter Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2" id="gallery-filters">
+<button class="filter-btn active px-4 py-2 rounded-md text-xs font-tech font-bold uppercase tracking-wider bg-neon-cyan text-cyber-950 transition" data-filter="all">Todos</button>
+<button class="filter-btn px-4 py-2 rounded-md text-xs font-tech font-bold uppercase tracking-wider bg-cyber-850 text-metal-300 hover:text-white border border-cyber-700 transition" data-filter="tecnico">Peças Técnicas</button>
+<button class="filter-btn px-4 py-2 rounded-md text-xs font-tech font-bold uppercase tracking-wider bg-cyber-850 text-metal-300 hover:text-white border border-cyber-700 transition" data-filter="prototipo">Protótipos</button>
+<button class="filter-btn px-4 py-2 rounded-md text-xs font-tech font-bold uppercase tracking-wider bg-cyber-850 text-metal-300 hover:text-white border border-cyber-700 transition" data-filter="decor">Decoração</button>
+<button class="filter-btn px-4 py-2 rounded-md text-xs font-tech font-bold uppercase tracking-wider bg-cyber-850 text-metal-300 hover:text-white border border-cyber-700 transition" data-filter="brinquedo">Colecionáveis</button>
+</div>
+</div>
+<!-- Models Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="models-grid">
+<!-- Model Card 1 -->
+<div class="model-card bg-cyber-850 rounded-xl border border-cyber-700 overflow-hidden hover:border-neon-cyan/60 transition group" data-category="tecnico">
+<div class="relative h-56 bg-gradient-to-b from-cyber-800 to-cyber-900 flex items-center justify-center p-6 border-b border-cyber-700/60 overflow-hidden">
+<div class="absolute inset-0 cyber-grid opacity-30"></div>
+<!-- Procedural 3D SVG Shape Preview -->
+<svg class="w-32 h-32 text-neon-cyan group-hover:scale-110 transition duration-500 drop-shadow-[0_0_15px_rgba(0,217,232,0.5)]" fill="none" stroke="currentColor" stroke-width="3" viewbox="0 0 100 100">
+<polygon points="50 15, 85 35, 85 75, 50 95, 15 75, 15 35" stroke-dasharray="2 2"></polygon>
+<circle cx="50" cy="55" r="22" stroke="white" stroke-width="2.5"></circle>
+<line stroke="currentColor" x1="50" x2="50" y1="15" y2="55"></line>
+<line stroke="currentColor" x1="85" x2="50" y1="35" y2="55"></line>
+<line stroke="currentColor" x1="15" x2="50" y1="35" y2="55"></line>
+</svg>
+<div class="absolute top-3 right-3 bg-cyber-950/80 text-neon-cyan text-[10px] font-tech font-bold px-2 py-1 rounded border border-cyber-700">
+                PETG INDUSTRIAL
+              </div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<h3 class="font-display font-bold text-white text-base">Engrenagem Planetária V2</h3>
+<span class="text-neon-cyan font-tech font-bold text-sm">R$ 85,00</span>
+</div>
+<p class="text-xs text-metal-400 mt-2">Mancal com tolerância interna para esferas de 6mm. Zero folga mecânica.</p>
+<div class="mt-4 pt-3 border-t border-cyber-700/60 grid grid-cols-2 text-[11px] font-tech text-metal-400">
+<div>Tempo: <span class="text-white font-medium">3h 40min</span></div>
+<div>Peso: <span class="text-white font-medium">118g</span></div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Engrenagem Planetária', 118, 'PETG')">
+                Simular no Orçamento
+              </button>
+</div>
+</div>
+<!-- Model Card 2 -->
+<div class="model-card bg-cyber-850 rounded-xl border border-cyber-700 overflow-hidden hover:border-neon-cyan/60 transition group" data-category="prototipo">
+<div class="relative h-56 bg-gradient-to-b from-cyber-800 to-cyber-900 flex items-center justify-center p-6 border-b border-cyber-700/60 overflow-hidden">
+<div class="absolute inset-0 cyber-grid opacity-30"></div>
+<svg class="w-32 h-32 text-metal-100 group-hover:scale-110 transition duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 100 100">
+<rect height="50" rx="8" stroke="currentColor" width="50" x="25" y="25"></rect>
+<circle cx="50" cy="50" r="14" stroke="#00D9E8" stroke-width="3"></circle>
+<path d="M50 10 L50 25 M50 75 L50 90 M10 50 L25 50 M75 50 L90 50" stroke="#00D9E8"></path>
+</svg>
+<div class="absolute top-3 right-3 bg-cyber-950/80 text-white text-[10px] font-tech font-bold px-2 py-1 rounded border border-cyber-700">
+                RESINA TOUGH
+              </div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<h3 class="font-display font-bold text-white text-base">Case IoT Sensor IP67</h3>
+<span class="text-neon-cyan font-tech font-bold text-sm">R$ 130,00</span>
+</div>
+<p class="text-xs text-metal-400 mt-2">Gabinete hermético para placa ESP32 com guarnição para vedação O-ring.</p>
+<div class="mt-4 pt-3 border-t border-cyber-700/60 grid grid-cols-2 text-[11px] font-tech text-metal-400">
+<div>Tempo: <span class="text-white font-medium">5h 10min</span></div>
+<div>Peso: <span class="text-white font-medium">85g</span></div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Case IoT Sensor', 85, 'Resina')">
+                Simular no Orçamento
+              </button>
+</div>
+</div>
+<!-- Model Card 3 -->
+<div class="model-card bg-cyber-850 rounded-xl border border-cyber-700 overflow-hidden hover:border-neon-cyan/60 transition group" data-category="decor">
+<div class="relative h-56 bg-gradient-to-b from-cyber-800 to-cyber-900 flex items-center justify-center p-6 border-b border-cyber-700/60 overflow-hidden">
+<div class="absolute inset-0 cyber-grid opacity-30"></div>
+<svg class="w-32 h-32 text-neon-glow group-hover:scale-110 transition duration-500 drop-shadow-[0_0_15px_rgba(45,225,240,0.5)]" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 100 100">
+<path d="M50 15 C30 35 25 65 50 85 C75 65 70 35 50 15 Z" stroke="currentColor"></path>
+<path d="M50 25 C38 40 38 60 50 75 C62 60 62 40 50 25 Z" stroke="white" stroke-dasharray="3 3"></path>
+</svg>
+<div class="absolute top-3 right-3 bg-cyber-950/80 text-neon-cyan text-[10px] font-tech font-bold px-2 py-1 rounded border border-cyber-700">
+                PLA SILK METÁLICO
+              </div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<h3 class="font-display font-bold text-white text-base">Vaso Voronoi Paramétrico</h3>
+<span class="text-neon-cyan font-tech font-bold text-sm">R$ 160,00</span>
+</div>
+<p class="text-xs text-metal-400 mt-2">Geometria gerativa de parede dupla com reflexo perolado sem costura visível.</p>
+<div class="mt-4 pt-3 border-t border-cyber-700/60 grid grid-cols-2 text-[11px] font-tech text-metal-400">
+<div>Tempo: <span class="text-white font-medium">9h 45min</span></div>
+<div>Peso: <span class="text-white font-medium">240g</span></div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Vaso Voronoi', 240, 'PLA Silk')">
+                Simular no Orçamento
+              </button>
+</div>
+</div>
+<!-- Model Card 4 -->
+<div class="model-card bg-cyber-850 rounded-xl border border-cyber-700 overflow-hidden hover:border-neon-cyan/60 transition group" data-category="brinquedo">
+<div class="relative h-56 bg-gradient-to-b from-cyber-800 to-cyber-900 flex items-center justify-center p-6 border-b border-cyber-700/60 overflow-hidden">
+<div class="absolute inset-0 cyber-grid opacity-30"></div>
+<svg class="w-32 h-32 text-metal-300 group-hover:scale-110 transition duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 100 100">
+<path d="M30 30 L50 15 L70 30 L70 60 L50 75 L30 60 Z" stroke="white" stroke-width="2"></path>
+<path d="M20 70 L50 85 L80 70" stroke="#00D9E8" stroke-width="3"></path>
+<circle cx="50" cy="45" fill="#00D9E8" r="8"></circle>
+</svg>
+<div class="absolute top-3 right-3 bg-cyber-950/80 text-neon-cyan text-[10px] font-tech font-bold px-2 py-1 rounded border border-cyber-700">
+                RESINA 8K
+              </div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<h3 class="font-display font-bold text-white text-base">Mecha Cyber Knight 18cm</h3>
+<span class="text-neon-cyan font-tech font-bold text-sm">R$ 210,00</span>
+</div>
+<p class="text-xs text-metal-400 mt-2">Miniatura multi-peças articuladas para pintura com detalhe de microranhuras.</p>
+<div class="mt-4 pt-3 border-t border-cyber-700/60 grid grid-cols-2 text-[11px] font-tech text-metal-400">
+<div>Tempo: <span class="text-white font-medium">8h 20min</span></div>
+<div>Peso: <span class="text-white font-medium">190g</span></div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Mecha Cyber Knight', 190, 'Resina')">
+                Simular no Orçamento
+              </button>
+</div>
+</div>
+<!-- Model Card 5 -->
+<div class="model-card bg-cyber-850 rounded-xl border border-cyber-700 overflow-hidden hover:border-neon-cyan/60 transition group" data-category="tecnico">
+<div class="relative h-56 bg-gradient-to-b from-cyber-800 to-cyber-900 flex items-center justify-center p-6 border-b border-cyber-700/60 overflow-hidden">
+<div class="absolute inset-0 cyber-grid opacity-30"></div>
+<svg class="w-32 h-32 text-neon-cyan group-hover:scale-110 transition duration-500 drop-shadow-[0_0_15px_rgba(0,217,232,0.5)]" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 100 100">
+<path d="M20 50 A 30 30 0 1 0 80 50 A 30 30 0 1 0 20 50 Z" stroke-dasharray="6 3"></path>
+<line stroke="white" stroke-width="2" x1="20" x2="80" y1="50" y2="50"></line>
+<line stroke="white" stroke-width="2" x1="50" x2="50" y1="20" y2="80"></line>
+<circle cx="50" cy="50" fill="#00D9E8" r="8"></circle>
+</svg>
+<div class="absolute top-3 right-3 bg-cyber-950/80 text-neon-cyan text-[10px] font-tech font-bold px-2 py-1 rounded border border-cyber-700">
+                ABS PRO HIGH-TEMP
+              </div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<h3 class="font-display font-bold text-white text-base">Duto de Ventilação Turbo</h3>
+<span class="text-neon-cyan font-tech font-bold text-sm">R$ 115,00</span>
+</div>
+<p class="text-xs text-metal-400 mt-2">Resistência térmica até 105°C para túnel de vento ou cockpit automotivo.</p>
+<div class="mt-4 pt-3 border-t border-cyber-700/60 grid grid-cols-2 text-[11px] font-tech text-metal-400">
+<div>Tempo: <span class="text-white font-medium">6h 15min</span></div>
+<div>Peso: <span class="text-white font-medium">145g</span></div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Duto Ventilação Turbo', 145, 'ABS Pro')">
+                Simular no Orçamento
+              </button>
+</div>
+</div>
+<!-- Model Card 6 -->
+<div class="model-card bg-cyber-850 rounded-xl border border-cyber-700 overflow-hidden hover:border-neon-cyan/60 transition group" data-category="prototipo">
+<div class="relative h-56 bg-gradient-to-b from-cyber-800 to-cyber-900 flex items-center justify-center p-6 border-b border-cyber-700/60 overflow-hidden">
+<div class="absolute inset-0 cyber-grid opacity-30"></div>
+<svg class="w-32 h-32 text-metal-200 group-hover:scale-110 transition duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 100 100">
+<polygon points="50 10, 90 85, 10 85" stroke="currentColor"></polygon>
+<circle cx="50" cy="60" r="12" stroke="#00D9E8" stroke-width="3"></circle>
+</svg>
+<div class="absolute top-3 right-3 bg-cyber-950/80 text-white text-[10px] font-tech font-bold px-2 py-1 rounded border border-cyber-700">
+                PETG-CF FIBRA DE CARBONO
+              </div>
+</div>
+<div class="p-5">
+<div class="flex items-center justify-between">
+<h3 class="font-display font-bold text-white text-base">Braço de Drone FPV Racing</h3>
+<span class="text-neon-cyan font-tech font-bold text-sm">R$ 95,00</span>
+</div>
+<p class="text-xs text-metal-400 mt-2">Ultra-leve e indeformável, reforçado com 15% de micro-fibras de carbono.</p>
+<div class="mt-4 pt-3 border-t border-cyber-700/60 grid grid-cols-2 text-[11px] font-tech text-metal-400">
+<div>Tempo: <span class="text-white font-medium">2h 50min</span></div>
+<div>Peso: <span class="text-white font-medium">62g</span></div>
+</div>
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Braço Drone FPV', 62, 'PETG')">
+                Simular no Orçamento
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: InteractiveGallerySection -->
+<!-- BEGIN: InstantQuoteAndUploadSection -->
+<section class="py-24 bg-cyber-950 border-t border-cyber-800 relative" id="orcamento">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-neon-cyan/40 bg-cyber-850 mb-3">
+<span class="text-neon-cyan text-xs font-tech font-bold uppercase tracking-widest">MOTOR DE CÁLCULO INSTANTÂNEO</span>
+</div>
+<h2 class="text-3xl sm:text-5xl font-display font-black text-white uppercase tracking-tight">
+            ORÇAMENTO <span class="text-neon-cyan">EM TEMPO REAL</span>
+</h2>
+<p class="text-metal-400 text-sm sm:text-base mt-3">
+            Faça upload do seu arquivo CAD ou ajuste os parâmetros técnicos para receber uma cotação estimada e prazos de postagem.
+          </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Upload & Parameters Simulator -->
+<div class="lg:col-span-7 bg-cyber-850 p-6 sm:p-8 rounded-2xl border border-cyber-700/90 shadow-xl space-y-6">
+<!-- Futuristic Dropzone -->
+<div class="relative rounded-xl border-2 border-dashed border-cyber-600 hover:border-neon-cyan p-8 text-center bg-cyber-900/70 transition cursor-pointer group overflow-hidden" id="dropzone">
+<input accept=".stl,.obj,.3mf,.step,.glb,.gltf" class="hidden" id="cadFileInput" type="file"/>
+<!-- Laser scanning effect on drag or hover -->
+<div class="absolute left-0 right-0 h-[2px] bg-neon-cyan shadow-neon laser-scanner pointer-events-none"></div>
+<div class="w-16 h-16 rounded-full bg-cyber-800 border border-cyber-600 text-neon-cyan mx-auto flex items-center justify-center group-hover:scale-110 group-hover:border-neon-cyan transition mb-4 shadow-neon-sm">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path></svg>
+</div>
+<h4 class="font-display font-bold text-white text-base tracking-wide">
+                ARRASTE SEU ARQUIVO 3D AQUI OU <span class="text-neon-cyan underline">CLIQUE PARA SELECIONAR</span>
+</h4>
+<p class="text-xs text-metal-400 mt-2 font-tech">
+                Formatos aceitos: <span class="text-metal-200">.STL, .OBJ, .3MF, .STEP, .GLB</span> (Máx: 100MB)
+              </p>
+<!-- Upload progress simulation -->
+<div class="hidden mt-4 p-3 bg-cyber-950 rounded border border-neon-cyan/40 text-left" id="upload-status">
+<div class="flex items-center justify-between text-xs font-tech mb-1">
+<span class="text-neon-cyan font-bold truncate max-w-[280px]" id="file-name-label">arquivo_analisado.stl</span>
+<span class="text-metal-400" id="file-size-label">14.2 MB</span>
+</div>
+<div class="w-full bg-cyber-800 rounded-full h-1.5 overflow-hidden">
+<div class="bg-neon-cyan h-full rounded-full transition-all duration-500" id="file-progress-bar" style="width: 100%"></div>
+</div>
+<span class="text-[10px] text-green-400 font-tech mt-1.5 flex items-center gap-1">
+                  ✓ Geometria válida e sem vértices abertos
+                </span>
+</div>
+</div>
+<!-- Material Selection -->
+<div>
+<label class="block text-xs font-tech font-bold text-metal-300 uppercase mb-2">1. Selecione a Tecnologia &amp; Material:</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5" id="material-selector">
+<button class="mat-option active p-3 rounded-lg border text-left transition border-neon-cyan bg-neon-cyan/10 text-white" data-dens="1.24" data-material="pla" data-rate="0.45" type="button">
+<span class="block text-xs font-bold font-display">PLA Silk</span>
+<span class="block text-[10px] text-metal-400 font-tech mt-0.5">Estético / Geral</span>
+</button>
+<button class="mat-option p-3 rounded-lg border text-left transition border-cyber-700 bg-cyber-900/60 text-metal-300 hover:border-metal-400" data-dens="1.27" data-material="petg" data-rate="0.55" type="button">
+<span class="block text-xs font-bold font-display">PETG Forte</span>
+<span class="block text-[10px] text-metal-400 font-tech mt-0.5">Resist. Mecânica</span>
+</button>
+<button class="mat-option p-3 rounded-lg border text-left transition border-cyber-700 bg-cyber-900/60 text-metal-300 hover:border-metal-400" data-dens="1.04" data-material="abs" data-rate="0.60" type="button">
+<span class="block text-xs font-bold font-display">ABS Pro</span>
+<span class="block text-[10px] text-metal-400 font-tech mt-0.5">Térmico / Lixável</span>
+</button>
+<button class="mat-option p-3 rounded-lg border text-left transition border-cyber-700 bg-cyber-900/60 text-metal-300 hover:border-metal-400" data-dens="1.15" data-material="resina" data-rate="0.95" type="button">
+<span class="block text-xs font-bold font-display">Resina 8K</span>
+<span class="block text-[10px] text-metal-400 font-tech mt-0.5">Ultra Resolução</span>
+</button>
+</div>
+</div>
+<!-- Infill & Color Options -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<div class="flex justify-between items-center mb-1">
+<label class="text-xs font-tech font-bold text-metal-300 uppercase" for="infillSlider">2. Preenchimento (Infill):</label>
+<span class="text-xs font-display font-bold text-neon-cyan" id="infillValueDisplay">20%</span>
+</div>
+<input class="w-full accent-neon-cyan bg-cyber-900 rounded-lg h-2 cursor-pointer" id="infillSlider" max="100" min="10" step="5" type="range" value="20"/>
+<div class="flex justify-between text-[10px] font-tech text-metal-500 mt-1">
+<span>10% (Leve)</span>
+<span>50% (Robusto)</span>
+<span>100% (Sólido)</span>
+</div>
+</div>
+<div>
+<label class="block text-xs font-tech font-bold text-metal-300 uppercase mb-2">3. Acabamento / Cor:</label>
+<select class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-2.5 text-xs font-tech focus:border-neon-cyan focus:ring-0" id="colorSelector">
+<option value="cyber-cyan">Ciano Neon Tech</option>
+<option value="stealth-black">Preto Espacial Fosco</option>
+<option value="brushed-silver">Prata Metálico Industrial</option>
+<option value="arctic-white">Branco Puro Técnico</option>
+</select>
+</div>
+</div>
+<!-- Quantity & Weight Override -->
+<div class="grid grid-cols-2 gap-4 pt-2">
+<div>
+<label class="block text-xs font-tech font-bold text-metal-300 uppercase mb-1" for="weightInput">Peso Estimado (g):</label>
+<input class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-2.5 text-sm font-tech focus:border-neon-cyan focus:ring-0" id="weightInput" max="5000" min="5" type="number" value="85"/>
+</div>
+<div>
+<label class="block text-xs font-tech font-bold text-metal-300 uppercase mb-1" for="qtyInput">Quantidade de Peças:</label>
+<input class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-2.5 text-sm font-tech focus:border-neon-cyan focus:ring-0" id="qtyInput" max="500" min="1" type="number" value="1"/>
+</div>
+</div>
+</div>
+<!-- Right: Summary Dashboard & Live Quote Ticket -->
+<div class="lg:col-span-5 bg-cyber-850 p-6 sm:p-8 rounded-2xl border border-neon-cyan/40 shadow-neon-sm space-y-6 relative overflow-hidden">
+<div class="flex items-center justify-between border-b border-cyber-700/80 pb-4">
+<div>
+<h3 class="font-display font-bold text-white text-lg uppercase tracking-wider">Cotação Estimada</h3>
+<span class="text-[11px] font-tech text-neon-cyan">PROTOCOLO: #SM-2025-X9</span>
+</div>
+<div class="w-10 h-10 rounded bg-cyber-900 border border-cyber-700 p-1 flex items-center justify-center">
+<img alt="Icon" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALStWrG90ondO74hGvMP9fUCoC7oXSdxOnMqKeRHmaqmjXVfWxQvQf1pNt6Myt4x-WjrYomJP6URT4Rh7bzIMurVSBH6P0tQSkag3zLUWxSlMpKu0bSQffe5U7EwtpZdsaiX_kVgO_Te2XmneeaPOjdXK-Tl1sl7ZPsYF4eQhG6aEy5h5EArTsSsCXIQWJ21vTIn_hAxvD24WK06RJCxSGdUbsYAw6DgcwRs9d3VlZlXCt8Z6Dat6z"/>
+</div>
+</div>
+<!-- Calculations Breakdown List -->
+<div class="space-y-3 font-tech text-xs">
+<div class="flex justify-between text-metal-400">
+<span>Material Escolhido:</span>
+<span class="text-white font-medium" id="summary-material">PLA Silk</span>
+</div>
+<div class="flex justify-between text-metal-400">
+<span>Densidade / Infill:</span>
+<span class="text-white font-medium" id="summary-infill">20% Estrutural</span>
+</div>
+<div class="flex justify-between text-metal-400">
+<span>Tempo de Máquina Estimado:</span>
+<span class="text-white font-medium" id="summary-time">~ 3h 15min</span>
+</div>
+<div class="flex justify-between text-metal-400">
+<span>Volume de Matéria-Prima:</span>
+<span class="text-white font-medium" id="summary-weight">85 gramas</span>
+</div>
+<div class="flex justify-between text-metal-400">
+<span>Lote Solicitado:</span>
+<span class="text-white font-medium" id="summary-qty">1 unidade</span>
+</div>
+<div class="flex justify-between text-metal-400 pt-2 border-t border-cyber-700">
+<span>Taxa de Calibração &amp; Setup:</span>
+<span class="text-green-400 font-bold">GRÁTIS</span>
+</div>
+</div>
+<!-- Grand Total Display -->
+<div class="p-5 bg-cyber-900/90 rounded-xl border border-cyber-700 text-center">
+<span class="text-xs font-tech uppercase text-metal-400 tracking-wider">Valor Estimado Total</span>
+<div class="text-4xl sm:text-5xl font-display font-black text-neon-cyan my-1 neon-text-glow" id="totalPriceDisplay">
+                R$ 78,25
+              </div>
+<span class="text-[10px] text-metal-400 font-tech">Em até 3x sem juros ou 5% de desconto no Pix</span>
+</div>
+<!-- Primary Action -->
+<div class="space-y-3">
+<button class="w-full py-4 bg-neon-cyan hover:bg-neon-glow text-cyber-950 font-display font-black text-xs uppercase tracking-wider rounded-lg shadow-neon transition duration-200 flex items-center justify-center gap-2" id="sendQuoteBtn">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Confirmar &amp; Enviar para Engenharia
+              </button>
+<a class="w-full py-3 bg-cyber-800 hover:bg-cyber-700 text-metal-200 font-tech font-bold text-xs uppercase tracking-wider rounded-lg border border-cyber-600 transition duration-200 flex items-center justify-center gap-2" href="https://wa.me/5511999999999?text=Ol%C3%A1,%20gostaria%20de%20um%20or%C3%A7amento%20imediato%20com%20a%20Solid%20Mesh%20Studio!" rel="noopener" target="_blank">
+<svg class="w-4 h-4 text-green-400" fill="currentColor" viewbox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-5.795 1.554zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"></path></svg>
+                Cotar Imediato via WhatsApp
+              </a>
+</div>
+<!-- Security Assurance Note -->
+<div class="flex items-center gap-2 text-[11px] text-metal-400 font-tech">
+<svg class="w-4 h-4 text-neon-cyan flex-shrink-0" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Arquivos protegidos por Acordo de Confidencialidade (NDA).</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: InstantQuoteAndUploadSection -->
+<!-- BEGIN: ContactAndEngineeringConsultation -->
+<section class="py-20 bg-cyber-900 border-b border-cyber-800 relative" id="contato">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left: Information & Trust -->
+<div class="lg:col-span-5 space-y-6">
+<span class="text-neon-cyan text-xs font-tech font-bold uppercase tracking-wider">[ SUPORTE ESPECIALIZADO ]</span>
+<h2 class="text-3xl sm:text-4xl font-display font-black text-white uppercase tracking-tight">
+              FALE COM UM <span class="metal-gradient">PROJETISTA 3D</span>
+</h2>
+<p class="text-metal-300 text-sm leading-relaxed">
+              Não tem o arquivo 3D pronto? Nossa equipe técnica de modelagem desenvolve seu projeto a partir de croquis, fotos com medidas ou amostras físicas danificadas.
+            </p>
+<div class="space-y-4 pt-2">
+<div class="flex items-start gap-4 p-4 rounded-xl bg-cyber-850 border border-cyber-700/80">
+<div class="w-10 h-10 rounded-lg bg-cyber-900 border border-neon-cyan/40 flex items-center justify-center text-neon-cyan flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="font-display font-bold text-white text-sm">Consultoria Gratuita de Viabilidade</h4>
+<p class="text-xs text-metal-400 mt-1">Analisamos a espessura de paredes, suporte necessário e custo de fabricação sem compromisso.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 rounded-xl bg-cyber-850 border border-cyber-700/80">
+<div class="w-10 h-10 rounded-lg bg-cyber-900 border border-neon-cyan/40 flex items-center justify-center text-neon-cyan flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="font-display font-bold text-white text-sm">E-mail Técnico</h4>
+<p class="text-xs text-metal-400 mt-1">contato@solidmeshstudio.com.br</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Direct Project Form -->
+<div class="lg:col-span-7 bg-cyber-850 p-8 rounded-2xl border border-cyber-700/90 shadow-xl">
+<form class="space-y-4" id="contactForm" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! Um projetista retornará em até 2 horas.');">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-tech text-metal-300 uppercase mb-1">Seu Nome / Empresa *</label>
+<input class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-3 text-sm focus:border-neon-cyan focus:ring-0" placeholder="Ex: Roberto Silva" required="" type="text"/>
+</div>
+<div>
+<label class="block text-xs font-tech text-metal-300 uppercase mb-1">WhatsApp / Telefone *</label>
+<input class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-3 text-sm focus:border-neon-cyan focus:ring-0" placeholder="(11) 99999-9999" required="" type="tel"/>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div>
+<label class="block text-xs font-tech text-metal-300 uppercase mb-1">E-mail Corporativo *</label>
+<input class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-3 text-sm focus:border-neon-cyan focus:ring-0" placeholder="roberto@empresa.com" required="" type="email"/>
+</div>
+<div>
+<label class="block text-xs font-tech text-metal-300 uppercase mb-1">Tipo de Demanda</label>
+<select class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-3 text-sm focus:border-neon-cyan focus:ring-0">
+<option>Preciso de Modelagem 3D do Zero</option>
+<option>Já tenho arquivo .STL / .OBJ pronto</option>
+<option>Lote de Produção em Série (+50 peças)</option>
+<option>Engenharia Reversa de Peça Quebrada</option>
+</select>
+</div>
+</div>
+<div>
+<label class="block text-xs font-tech text-metal-300 uppercase mb-1">Descrição do Projeto e Especificações Técnicas</label>
+<textarea class="w-full bg-cyber-900 border border-cyber-700 text-white rounded-lg p-3 text-sm focus:border-neon-cyan focus:ring-0" placeholder="Descreva dimensões estimadas, aplicação mecânica, esforço que a peça sofrerá ou detalhes estéticos desejados..." required="" rows="4"></textarea>
+</div>
+<button class="w-full py-4 bg-neon-cyan hover:bg-neon-glow text-cyber-950 font-display font-bold text-xs uppercase tracking-wider rounded-lg shadow-neon transition duration-200" type="submit">
+                Enviar Detalhes para o Projetista
+              </button>
+</form>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ContactAndEngineeringConsultation -->
+</main>
+<!-- BEGIN: MainFooter -->
+<footer class="bg-cyber-950 text-metal-400 font-tech text-xs border-t border-cyber-800">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+<!-- Brand identity and mission -->
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded border border-neon-cyan/40 p-0.5 shadow-neon-sm">
+<img alt="Solid Mesh Studio" class="w-full h-full object-cover rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgE8jGrB6lr9ggJ3U-p8SdwuY2Kf8Em917ku361AYxuV032wTGT5KI5wHfT3_J6i-ObL1lQ61-tJny9YXcR25xM-xreuLLoqoK0gtex85YIgUGuR2gvOYwDZ5BNJD8STq4LwrfYbU4wZb6hV8YVb_uqF4khLoKjNDhqfV3OLG7fcIuYIMkCFK3RejSO9If9aTJk4dWl72bla_fkxYQSig-lm03RYZ0N1jXlBYbw1_BGdPBtQp0h9CV"/>
+</div>
+<span class="font-display font-black text-white text-base tracking-wider">SOLID MESH STUDIO</span>
+</div>
+<p class="text-xs text-metal-500 leading-relaxed">
+            Laboratório avançado de fabricação aditiva, engenharia reversa e soluções industriais sob medida. São Paulo - SP, Brasil.
+          </p>
+<div class="text-[11px] text-neon-cyan font-bold">
+            CNPJ: 42.819.301/0001-90
+          </div>
+</div>
+<!-- Navigation Links -->
+<div>
+<h5 class="font-display font-bold text-white text-xs uppercase tracking-wider mb-3">Navegação</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-neon-cyan transition" href="#modelos">Catálogo de Modelos</a></li>
+<li><a class="hover:text-neon-cyan transition" href="#orcamento">Calculadora de Custo STL</a></li>
+<li><a class="hover:text-neon-cyan transition" href="#sobre">Sobre a Tecnologia</a></li>
+<li><a class="hover:text-neon-cyan transition" href="#contato">Fale com um Projetista</a></li>
+</ul>
+</div>
+<!-- Materials Specs -->
+<div>
+<h5 class="font-display font-bold text-white text-xs uppercase tracking-wider mb-3">Materiais Homologados</h5>
+<ul class="space-y-2">
+<li><span class="text-metal-200">PLA &amp; PLA Silk:</span> Biodegradável e alta estética</li>
+<li><span class="text-metal-200">PETG:</span> Resistente a impactos e intempéries</li>
+<li><span class="text-metal-200">ABS / ASA:</span> Térmico e resistente a UV</li>
+<li><span class="text-metal-200">Resina 8K:</span> Nível micrométrico de precisão</li>
+</ul>
+</div>
+<!-- Policies & Quality -->
+<div>
+<h5 class="font-display font-bold text-white text-xs uppercase tracking-wider mb-3">Garantia &amp; Rigor</h5>
+<p class="text-xs text-metal-500 mb-3">
+            Todas as impressões passam por controle dimensional óptico e inspeção de camadas antes do envio.
+          </p>
+<div class="flex items-center gap-3 text-metal-300">
+<span class="p-2 rounded bg-cyber-900 border border-cyber-700 text-neon-cyan">ISO 9001 Compliant</span>
+<span class="p-2 rounded bg-cyber-900 border border-cyber-700 text-neon-cyan">NDA Seguro</span>
+</div>
+</div>
+</div>
+<!-- Copyright Bar -->
+<div class="mt-12 pt-6 border-t border-cyber-800/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-metal-500">
+<div>
+          © 2025 Solid Mesh Studio 3D. Todos os direitos reservados.
+        </div>
+<div class="flex items-center gap-6">
+<a class="hover:text-metal-300 transition" href="#">Termos de Serviço</a>
+<a class="hover:text-metal-300 transition" href="#">Política de Privacidade</a>
+<a class="hover:text-metal-300 transition" href="#">Segurança de Dados CAD</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+<!-- BEGIN: InteractiveScripts -->
+<!-- Script for 3D Viewport in Hero Canvas -->
+<script data-purpose="hero-3d-canvas-renderer">
+    (function init3DHeroCanvas() {
+      const canvas = document.getElementById('heroMeshCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+
+      let width = canvas.clientWidth;
+      let height = canvas.clientHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      // Hexagonal Prisma 3D Node Mesh (Inspired by Solid Mesh Studio Hex Logo)
+      let rotationX = 0.4;
+      let rotationY = 0.5;
+      let isDragging = false;
+      let lastMouseX = 0;
+      let lastMouseY = 0;
+      let meshColor = '#00D9E8';
+      let zoom = 1.0;
+
+      // Base vertices for a complex mechanical prism
+      const baseVertices = [
+        // Top Hexagon
+        {x: 0, y: -65, z: 0},
+        {x: 55, y: -35, z: 35},
+        {x: 55, y: -35, z: -35},
+        {x: -55, y: -35, z: 35},
+        {x: -55, y: -35, z: -35},
+        {x: 0, y: -35, z: 65},
+        {x: 0, y: -35, z: -65},
+        // Mid Core nodes
+        {x: 75, y: 10, z: 0},
+        {x: -75, y: 10, z: 0},
+        {x: 0, y: 10, z: 75},
+        {x: 0, y: 10, z: -75},
+        {x: 45, y: 10, z: 45},
+        {x: -45, y: 10, z: -45},
+        // Bottom Base
+        {x: 0, y: 70, z: 0},
+        {x: 50, y: 55, z: 40},
+        {x: 50, y: 55, z: -40},
+        {x: -50, y: 55, z: 40},
+        {x: -50, y: 55, z: -40},
+      ];
+
+      const edges = [
+        [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],
+        [1,7],[2,7],[3,8],[4,8],[5,9],[6,10],
+        [7,11],[8,12],[9,11],[10,12],
+        [11,14],[12,17],[9,16],[10,15],
+        [13,14],[13,15],[13,16],[13,17],
+        [14,15],[15,17],[17,16],[16,14],
+        [7,13],[8,13],[1,5],[3,5],[2,6],[4,6]
+      ];
+
+      function rotate(v, rx, ry) {
+        // Rotate Y
+        let cosY = Math.cos(ry);
+        let sinY = Math.sin(ry);
+        let x1 = v.x * cosY - v.z * sinY;
+        let z1 = v.z * cosY + v.x * sinY;
+
+        // Rotate X
+        let cosX = Math.cos(rx);
+        let sinX = Math.sin(rx);
+        let y2 = v.y * cosX - z1 * sinX;
+        let z2 = z1 * cosX + v.y * sinX;
+
+        return { x: x1, y: y2, z: z2 };
+      }
+
+      function project(v) {
+        const perspective = 340;
+        const scale = (perspective / (perspective + v.z + 150)) * zoom;
+        return {
+          x: v.x * scale + width / 2,
+          y: v.y * scale + height / 2,
+          scale: scale
+        };
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        // Technical Grid background inside canvas
+        ctx.strokeStyle = 'rgba(0, 217, 232, 0.07)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < width; x += 25) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+        for (let y = 0; y < height; y += 25) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
+
+        // Concentric target circles in canvas center
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+        ctx.beginPath();
+        ctx.arc(width/2, height/2, 110, 0, Math.PI*2);
+        ctx.stroke();
+
+        const projected = baseVertices.map(v => project(rotate(v, rotationX, rotationY)));
+
+        // Render Edges
+        ctx.strokeStyle = meshColor;
+        ctx.lineWidth = 1.8;
+        ctx.shadowColor = meshColor;
+        ctx.shadowBlur = 8;
+
+        edges.forEach(([startIdx, endIdx]) => {
+          const p1 = projected[startIdx];
+          const p2 = projected[endIdx];
+          ctx.beginPath();
+          ctx.moveTo(p1.x, p1.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.stroke();
+        });
+
+        // Render Nodes / Vertices
+        ctx.shadowBlur = 12;
+        projected.forEach((p) => {
+          ctx.fillStyle = '#FFFFFF';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, 3 * p.scale, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Continuous subtle auto-rotation if user is not actively interacting
+        if (!isDragging) {
+          rotationY += 0.007;
+          rotationX = 0.35 + Math.sin(Date.now() * 0.001) * 0.1;
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      // Mouse drag controls
+      canvas.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - lastMouseX;
+        const deltaY = e.clientY - lastMouseY;
+        rotationY += deltaX * 0.01;
+        rotationX += deltaY * 0.01;
+        lastMouseX = e.clientX;
+        lastMouseY = e.clientY;
+      });
+
+      // Mouse wheel zoom
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        zoom += e.deltaY * -0.001;
+        zoom = Math.min(Math.max(0.6, zoom), 1.7);
+      }, { passive: false });
+
+      // Resize observer
+      window.addEventListener('resize', () => {
+        width = canvas.clientWidth;
+        height = canvas.clientHeight;
+        canvas.width = width;
+        canvas.height = height;
+      });
+
+      // Material color changer
+      const colorBtns = document.querySelectorAll('#hero-material-switches button');
+      colorBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          meshColor = btn.getAttribute('data-color') || '#00D9E8';
+        });
+      });
+
+      draw();
+    })();
+  </script>
+<!-- Script for Interactive Quote Calculator and Filters -->
+<script data-purpose="instant-quote-and-gallery-logic">
+    // Gallery Filtering
+    const filterButtons = document.querySelectorAll('#gallery-filters .filter-btn');
+    const cards = document.querySelectorAll('.model-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('bg-neon-cyan', 'text-cyber-950');
+          b.classList.add('bg-cyber-850', 'text-metal-300', 'border', 'border-cyber-700');
+        });
+        btn.classList.add('bg-neon-cyan', 'text-cyber-950');
+        btn.classList.remove('bg-cyber-850', 'text-metal-300', 'border-cyber-700');
+
+        const filter = btn.getAttribute('data-filter');
+        cards.forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-category') === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Real-Time Instant Quote Calculator
+    const weightInput = document.getElementById('weightInput');
+    const qtyInput = document.getElementById('qtyInput');
+    const infillSlider = document.getElementById('infillSlider');
+    const infillDisplay = document.getElementById('infillValueDisplay');
+    const totalPriceDisplay = document.getElementById('totalPriceDisplay');
+    const summaryMaterial = document.getElementById('summary-material');
+    const summaryInfill = document.getElementById('summary-infill');
+    const summaryWeight = document.getElementById('summary-weight');
+    const summaryQty = document.getElementById('summary-qty');
+    const summaryTime = document.getElementById('summary-time');
+    const materialButtons = document.querySelectorAll('.mat-option');
+
+    let currentRate = 0.45; // R$ per gram
+    let currentMaterialName = 'PLA Silk';
+
+    function recalculateQuote() {
+      const weight = parseFloat(weightInput.value) || 10;
+      const qty = parseInt(qtyInput.value) || 1;
+      const infill = parseInt(infillSlider.value) || 20;
+
+      // Infill multiplier adjustment: 20% is baseline 1.0, 100% is ~1.5x material
+      const infillFactor = 1 + ((infill - 20) / 160);
+      const effectiveWeight = (weight * infillFactor);
+
+      // Hourly machine cost base: 1 hour roughly per 25g
+      const machineHours = (effectiveWeight / 26) * qty;
+      const machineCost = machineHours * 7.5; // R$ 7,50 machine operational hour
+
+      // Material cost
+      const materialCost = effectiveWeight * currentRate * qty;
+
+      // Base technician setup
+      const baseSetup = 20.0;
+
+      const grandTotal = Math.max(35.0, (materialCost + machineCost + baseSetup));
+
+      // Formatted outputs
+      totalPriceDisplay.textContent = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+      summaryMaterial.textContent = currentMaterialName;
+      summaryInfill.textContent = `${infill}% Estrutural`;
+      summaryWeight.textContent = `${Math.round(effectiveWeight * qty)} gramas`;
+      summaryQty.textContent = `${qty} ${qty > 1 ? 'unidades' : 'unidade'}`;
+      
+      const hours = Math.floor(machineHours);
+      const mins = Math.round((machineHours - hours) * 60);
+      summaryTime.textContent = `~ ${Math.max(1, hours)}h ${mins}min`;
+    }
+
+    infillSlider.addEventListener('input', (e) => {
+      infillDisplay.textContent = `${e.target.value}%`;
+      recalculateQuote();
+    });
+
+    weightInput.addEventListener('input', recalculateQuote);
+    qtyInput.addEventListener('input', recalculateQuote);
+
+    materialButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        materialButtons.forEach(b => {
+          b.classList.remove('border-neon-cyan', 'bg-neon-cyan/10', 'text-white');
+          b.classList.add('border-cyber-700', 'bg-cyber-900/60', 'text-metal-300');
+        });
+        btn.classList.add('border-neon-cyan', 'bg-neon-cyan/10', 'text-white');
+        btn.classList.remove('border-cyber-700', 'bg-cyber-900/60', 'text-metal-300');
+
+        currentRate = parseFloat(btn.getAttribute('data-rate'));
+        currentMaterialName = btn.querySelector('.font-display').textContent;
+        recalculateQuote();
+      });
+    });
+
+    // Helper for gallery cards to inject sample into calculator
+    window.loadSampleToViewer = function(name, weight, matCategory) {
+      weightInput.value = weight;
+      const targetMat = Array.from(materialButtons).find(b => b.textContent.includes(matCategory)) || materialButtons[0];
+      targetMat.click();
+      recalculateQuote();
+
+      // Smooth scroll to calculator
+      document.getElementById('orcamento').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    // Simulated Drag and drop functionality
+    const dropzone = document.getElementById('dropzone');
+    const cadFileInput = document.getElementById('cadFileInput');
+    const uploadStatus = document.getElementById('upload-status');
+    const fileNameLabel = document.getElementById('file-name-label');
+    const fileSizeLabel = document.getElementById('file-size-label');
+
+    dropzone.addEventListener('click', () => cadFileInput.click());
+
+    cadFileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        uploadStatus.classList.remove('hidden');
+        fileNameLabel.textContent = file.name;
+        fileSizeLabel.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
+        
+        // Random simulated weight based on file
+        const calculatedWeight = Math.floor(Math.random() * 120) + 40;
+        weightInput.value = calculatedWeight;
+        recalculateQuote();
+      }
+    });
+
+    // Confirmation Action
+    document.getElementById('sendQuoteBtn').addEventListener('click', () => {
+      alert(`Solicitação confirmada! A engenharia da Solid Mesh Studio reservou seu lote. Um consultor entrará em contato com a revisão técnica da malha.`);
+    });
+
+    // Initial calculation on load
+    recalculateQuote();
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>
