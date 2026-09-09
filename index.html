@@ -52,34 +52,9 @@
       }
     }
   </script>
-<!-- BEGIN: Custom Global Styles -->
-<style data-purpose="cyber-background-grid">
-    .cyber-grid {
-      background-size: 40px 40px;
-      background-image: 
-        linear-gradient(to right, rgba(0, 217, 232, 0.04) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 217, 232, 0.04) 1px, transparent 1px);
-    }
-    .radar-circle {
-      background: radial-gradient(circle, rgba(0,217,232,0.12) 0%, rgba(0,217,232,0) 70%);
-    }
-    .metal-gradient {
-      background: linear-gradient(135deg, #FFFFFF 0%, #B8C2CC 50%, #7E8C9B 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .neon-text-glow {
-      text-shadow: 0 0 14px rgba(0, 217, 232, 0.65);
-    }
-    .laser-scanner {
-      animation: scanLaser 3s ease-in-out infinite alternate;
-    }
-    @keyframes scanLaser {
-      0% { top: 0%; opacity: 0.8; }
-      100% { top: 96%; opacity: 0.4; }
-    }
-  </style>
-<!-- END: Custom Global Styles -->
+  <!-- Theme & Custom CSS Modules -->
+  <link rel="stylesheet" href="css/theme.css"/>
+  <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body class="bg-cyber-900 text-metal-300 font-sans antialiased selection:bg-neon-cyan selection:text-cyber-950 overflow-x-hidden cyber-grid">
 <!-- BEGIN: MainNavbar -->
@@ -337,7 +312,7 @@
 <div>Tempo: <span class="text-white font-medium">3h 40min</span></div>
 <div>Peso: <span class="text-white font-medium">118g</span></div>
 </div>
-<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Engrenagem Planetária', 118, 'PETG')">
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" data-sample-name="Engrenagem Planetária" data-sample-weight="118" data-sample-mat="PETG" onclick="loadSampleToViewer('Engrenagem Planetária', 118, 'PETG')">
                 Simular no Orçamento
               </button>
 </div>
@@ -365,7 +340,7 @@
 <div>Tempo: <span class="text-white font-medium">5h 10min</span></div>
 <div>Peso: <span class="text-white font-medium">85g</span></div>
 </div>
-<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Case IoT Sensor', 85, 'Resina')">
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" data-sample-name="Case IoT Sensor" data-sample-weight="85" data-sample-mat="Resina" onclick="loadSampleToViewer('Case IoT Sensor', 85, 'Resina')">
                 Simular no Orçamento
               </button>
 </div>
@@ -392,7 +367,7 @@
 <div>Tempo: <span class="text-white font-medium">9h 45min</span></div>
 <div>Peso: <span class="text-white font-medium">240g</span></div>
 </div>
-<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Vaso Voronoi', 240, 'PLA Silk')">
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" data-sample-name="Vaso Voronoi" data-sample-weight="240" data-sample-mat="PLA Silk" onclick="loadSampleToViewer('Vaso Voronoi', 240, 'PLA Silk')">
                 Simular no Orçamento
               </button>
 </div>
@@ -420,7 +395,7 @@
 <div>Tempo: <span class="text-white font-medium">8h 20min</span></div>
 <div>Peso: <span class="text-white font-medium">190g</span></div>
 </div>
-<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Mecha Cyber Knight', 190, 'Resina')">
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" data-sample-name="Mecha Cyber Knight" data-sample-weight="190" data-sample-mat="Resina" onclick="loadSampleToViewer('Mecha Cyber Knight', 190, 'Resina')">
                 Simular no Orçamento
               </button>
 </div>
@@ -449,7 +424,7 @@
 <div>Tempo: <span class="text-white font-medium">6h 15min</span></div>
 <div>Peso: <span class="text-white font-medium">145g</span></div>
 </div>
-<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Duto Ventilação Turbo', 145, 'ABS Pro')">
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" data-sample-name="Duto Ventilação Turbo" data-sample-weight="145" data-sample-mat="ABS Pro" onclick="loadSampleToViewer('Duto Ventilação Turbo', 145, 'ABS Pro')">
                 Simular no Orçamento
               </button>
 </div>
@@ -476,7 +451,7 @@
 <div>Tempo: <span class="text-white font-medium">2h 50min</span></div>
 <div>Peso: <span class="text-white font-medium">62g</span></div>
 </div>
-<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" onclick="loadSampleToViewer('Braço Drone FPV', 62, 'PETG')">
+<button class="mt-4 w-full py-2.5 bg-cyber-800 hover:bg-neon-cyan hover:text-cyber-950 text-white font-tech font-bold text-xs uppercase tracking-wider rounded border border-cyber-600 transition duration-200" data-sample-name="Braço Drone FPV" data-sample-weight="62" data-sample-mat="PETG" onclick="loadSampleToViewer('Braço Drone FPV', 62, 'PETG')">
                 Simular no Orçamento
               </button>
 </div>
@@ -691,7 +666,7 @@
 </div>
 <!-- Right: Direct Project Form -->
 <div class="lg:col-span-7 bg-cyber-850 p-8 rounded-2xl border border-cyber-700/90 shadow-xl">
-<form class="space-y-4" id="contactForm" onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso! Um projetista retornará em até 2 horas.');">
+<form class="space-y-4" id="contactForm">
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 <div>
 <label class="block text-xs font-tech text-metal-300 uppercase mb-1">Seu Nome / Empresa *</label>
@@ -744,11 +719,8 @@
 <span class="font-display font-black text-white text-base tracking-wider">SOLID MESH STUDIO</span>
 </div>
 <p class="text-xs text-metal-500 leading-relaxed">
-            Laboratório avançado de fabricação aditiva, engenharia reversa e soluções industriais sob medida. São Paulo - SP, Brasil.
+            Laboratório avançado de fabricação aditiva, engenharia reversa e soluções industriais sob medida. Atibaia - SP, Brasil.
           </p>
-<div class="text-[11px] text-neon-cyan font-bold">
-            CNPJ: 42.819.301/0001-90
-          </div>
 </div>
 <!-- Navigation Links -->
 <div>
@@ -796,335 +768,7 @@
 </div>
 </footer>
 <!-- END: MainFooter -->
-<!-- BEGIN: InteractiveScripts -->
-<!-- Script for 3D Viewport in Hero Canvas -->
-<script data-purpose="hero-3d-canvas-renderer">
-    (function init3DHeroCanvas() {
-      const canvas = document.getElementById('heroMeshCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-
-      let width = canvas.clientWidth;
-      let height = canvas.clientHeight;
-      canvas.width = width;
-      canvas.height = height;
-
-      // Hexagonal Prisma 3D Node Mesh (Inspired by Solid Mesh Studio Hex Logo)
-      let rotationX = 0.4;
-      let rotationY = 0.5;
-      let isDragging = false;
-      let lastMouseX = 0;
-      let lastMouseY = 0;
-      let meshColor = '#00D9E8';
-      let zoom = 1.0;
-
-      // Base vertices for a complex mechanical prism
-      const baseVertices = [
-        // Top Hexagon
-        {x: 0, y: -65, z: 0},
-        {x: 55, y: -35, z: 35},
-        {x: 55, y: -35, z: -35},
-        {x: -55, y: -35, z: 35},
-        {x: -55, y: -35, z: -35},
-        {x: 0, y: -35, z: 65},
-        {x: 0, y: -35, z: -65},
-        // Mid Core nodes
-        {x: 75, y: 10, z: 0},
-        {x: -75, y: 10, z: 0},
-        {x: 0, y: 10, z: 75},
-        {x: 0, y: 10, z: -75},
-        {x: 45, y: 10, z: 45},
-        {x: -45, y: 10, z: -45},
-        // Bottom Base
-        {x: 0, y: 70, z: 0},
-        {x: 50, y: 55, z: 40},
-        {x: 50, y: 55, z: -40},
-        {x: -50, y: 55, z: 40},
-        {x: -50, y: 55, z: -40},
-      ];
-
-      const edges = [
-        [0,1],[0,2],[0,3],[0,4],[0,5],[0,6],
-        [1,7],[2,7],[3,8],[4,8],[5,9],[6,10],
-        [7,11],[8,12],[9,11],[10,12],
-        [11,14],[12,17],[9,16],[10,15],
-        [13,14],[13,15],[13,16],[13,17],
-        [14,15],[15,17],[17,16],[16,14],
-        [7,13],[8,13],[1,5],[3,5],[2,6],[4,6]
-      ];
-
-      function rotate(v, rx, ry) {
-        // Rotate Y
-        let cosY = Math.cos(ry);
-        let sinY = Math.sin(ry);
-        let x1 = v.x * cosY - v.z * sinY;
-        let z1 = v.z * cosY + v.x * sinY;
-
-        // Rotate X
-        let cosX = Math.cos(rx);
-        let sinX = Math.sin(rx);
-        let y2 = v.y * cosX - z1 * sinX;
-        let z2 = z1 * cosX + v.y * sinX;
-
-        return { x: x1, y: y2, z: z2 };
-      }
-
-      function project(v) {
-        const perspective = 340;
-        const scale = (perspective / (perspective + v.z + 150)) * zoom;
-        return {
-          x: v.x * scale + width / 2,
-          y: v.y * scale + height / 2,
-          scale: scale
-        };
-      }
-
-      function draw() {
-        ctx.clearRect(0, 0, width, height);
-
-        // Technical Grid background inside canvas
-        ctx.strokeStyle = 'rgba(0, 217, 232, 0.07)';
-        ctx.lineWidth = 1;
-        for (let x = 0; x < width; x += 25) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, height);
-          ctx.stroke();
-        }
-        for (let y = 0; y < height; y += 25) {
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(width, y);
-          ctx.stroke();
-        }
-
-        // Concentric target circles in canvas center
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-        ctx.beginPath();
-        ctx.arc(width/2, height/2, 110, 0, Math.PI*2);
-        ctx.stroke();
-
-        const projected = baseVertices.map(v => project(rotate(v, rotationX, rotationY)));
-
-        // Render Edges
-        ctx.strokeStyle = meshColor;
-        ctx.lineWidth = 1.8;
-        ctx.shadowColor = meshColor;
-        ctx.shadowBlur = 8;
-
-        edges.forEach(([startIdx, endIdx]) => {
-          const p1 = projected[startIdx];
-          const p2 = projected[endIdx];
-          ctx.beginPath();
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.stroke();
-        });
-
-        // Render Nodes / Vertices
-        ctx.shadowBlur = 12;
-        projected.forEach((p) => {
-          ctx.fillStyle = '#FFFFFF';
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 3 * p.scale, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        // Continuous subtle auto-rotation if user is not actively interacting
-        if (!isDragging) {
-          rotationY += 0.007;
-          rotationX = 0.35 + Math.sin(Date.now() * 0.001) * 0.1;
-        }
-
-        requestAnimationFrame(draw);
-      }
-
-      // Mouse drag controls
-      canvas.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        lastMouseX = e.clientX;
-        lastMouseY = e.clientY;
-      });
-
-      window.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-
-      window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        const deltaX = e.clientX - lastMouseX;
-        const deltaY = e.clientY - lastMouseY;
-        rotationY += deltaX * 0.01;
-        rotationX += deltaY * 0.01;
-        lastMouseX = e.clientX;
-        lastMouseY = e.clientY;
-      });
-
-      // Mouse wheel zoom
-      canvas.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        zoom += e.deltaY * -0.001;
-        zoom = Math.min(Math.max(0.6, zoom), 1.7);
-      }, { passive: false });
-
-      // Resize observer
-      window.addEventListener('resize', () => {
-        width = canvas.clientWidth;
-        height = canvas.clientHeight;
-        canvas.width = width;
-        canvas.height = height;
-      });
-
-      // Material color changer
-      const colorBtns = document.querySelectorAll('#hero-material-switches button');
-      colorBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          meshColor = btn.getAttribute('data-color') || '#00D9E8';
-        });
-      });
-
-      draw();
-    })();
-  </script>
-<!-- Script for Interactive Quote Calculator and Filters -->
-<script data-purpose="instant-quote-and-gallery-logic">
-    // Gallery Filtering
-    const filterButtons = document.querySelectorAll('#gallery-filters .filter-btn');
-    const cards = document.querySelectorAll('.model-card');
-
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        filterButtons.forEach(b => {
-          b.classList.remove('bg-neon-cyan', 'text-cyber-950');
-          b.classList.add('bg-cyber-850', 'text-metal-300', 'border', 'border-cyber-700');
-        });
-        btn.classList.add('bg-neon-cyan', 'text-cyber-950');
-        btn.classList.remove('bg-cyber-850', 'text-metal-300', 'border-cyber-700');
-
-        const filter = btn.getAttribute('data-filter');
-        cards.forEach(card => {
-          if (filter === 'all' || card.getAttribute('data-category') === filter) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-
-    // Real-Time Instant Quote Calculator
-    const weightInput = document.getElementById('weightInput');
-    const qtyInput = document.getElementById('qtyInput');
-    const infillSlider = document.getElementById('infillSlider');
-    const infillDisplay = document.getElementById('infillValueDisplay');
-    const totalPriceDisplay = document.getElementById('totalPriceDisplay');
-    const summaryMaterial = document.getElementById('summary-material');
-    const summaryInfill = document.getElementById('summary-infill');
-    const summaryWeight = document.getElementById('summary-weight');
-    const summaryQty = document.getElementById('summary-qty');
-    const summaryTime = document.getElementById('summary-time');
-    const materialButtons = document.querySelectorAll('.mat-option');
-
-    let currentRate = 0.45; // R$ per gram
-    let currentMaterialName = 'PLA Silk';
-
-    function recalculateQuote() {
-      const weight = parseFloat(weightInput.value) || 10;
-      const qty = parseInt(qtyInput.value) || 1;
-      const infill = parseInt(infillSlider.value) || 20;
-
-      // Infill multiplier adjustment: 20% is baseline 1.0, 100% is ~1.5x material
-      const infillFactor = 1 + ((infill - 20) / 160);
-      const effectiveWeight = (weight * infillFactor);
-
-      // Hourly machine cost base: 1 hour roughly per 25g
-      const machineHours = (effectiveWeight / 26) * qty;
-      const machineCost = machineHours * 7.5; // R$ 7,50 machine operational hour
-
-      // Material cost
-      const materialCost = effectiveWeight * currentRate * qty;
-
-      // Base technician setup
-      const baseSetup = 20.0;
-
-      const grandTotal = Math.max(35.0, (materialCost + machineCost + baseSetup));
-
-      // Formatted outputs
-      totalPriceDisplay.textContent = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
-      summaryMaterial.textContent = currentMaterialName;
-      summaryInfill.textContent = `${infill}% Estrutural`;
-      summaryWeight.textContent = `${Math.round(effectiveWeight * qty)} gramas`;
-      summaryQty.textContent = `${qty} ${qty > 1 ? 'unidades' : 'unidade'}`;
-      
-      const hours = Math.floor(machineHours);
-      const mins = Math.round((machineHours - hours) * 60);
-      summaryTime.textContent = `~ ${Math.max(1, hours)}h ${mins}min`;
-    }
-
-    infillSlider.addEventListener('input', (e) => {
-      infillDisplay.textContent = `${e.target.value}%`;
-      recalculateQuote();
-    });
-
-    weightInput.addEventListener('input', recalculateQuote);
-    qtyInput.addEventListener('input', recalculateQuote);
-
-    materialButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        materialButtons.forEach(b => {
-          b.classList.remove('border-neon-cyan', 'bg-neon-cyan/10', 'text-white');
-          b.classList.add('border-cyber-700', 'bg-cyber-900/60', 'text-metal-300');
-        });
-        btn.classList.add('border-neon-cyan', 'bg-neon-cyan/10', 'text-white');
-        btn.classList.remove('border-cyber-700', 'bg-cyber-900/60', 'text-metal-300');
-
-        currentRate = parseFloat(btn.getAttribute('data-rate'));
-        currentMaterialName = btn.querySelector('.font-display').textContent;
-        recalculateQuote();
-      });
-    });
-
-    // Helper for gallery cards to inject sample into calculator
-    window.loadSampleToViewer = function(name, weight, matCategory) {
-      weightInput.value = weight;
-      const targetMat = Array.from(materialButtons).find(b => b.textContent.includes(matCategory)) || materialButtons[0];
-      targetMat.click();
-      recalculateQuote();
-
-      // Smooth scroll to calculator
-      document.getElementById('orcamento').scrollIntoView({ behavior: 'smooth' });
-    };
-
-    // Simulated Drag and drop functionality
-    const dropzone = document.getElementById('dropzone');
-    const cadFileInput = document.getElementById('cadFileInput');
-    const uploadStatus = document.getElementById('upload-status');
-    const fileNameLabel = document.getElementById('file-name-label');
-    const fileSizeLabel = document.getElementById('file-size-label');
-
-    dropzone.addEventListener('click', () => cadFileInput.click());
-
-    cadFileInput.addEventListener('change', (e) => {
-      if (e.target.files && e.target.files[0]) {
-        const file = e.target.files[0];
-        uploadStatus.classList.remove('hidden');
-        fileNameLabel.textContent = file.name;
-        fileSizeLabel.textContent = `${(file.size / (1024 * 1024)).toFixed(1)} MB`;
-        
-        // Random simulated weight based on file
-        const calculatedWeight = Math.floor(Math.random() * 120) + 40;
-        weightInput.value = calculatedWeight;
-        recalculateQuote();
-      }
-    });
-
-    // Confirmation Action
-    document.getElementById('sendQuoteBtn').addEventListener('click', () => {
-      alert(`Solicitação confirmada! A engenharia da Solid Mesh Studio reservou seu lote. Um consultor entrará em contato com a revisão técnica da malha.`);
-    });
-
-    // Initial calculation on load
-    recalculateQuote();
-  </script>
-<!-- END: InteractiveScripts -->
-</body></html>
+  <!-- Main Application Entry Point (ES Modules) -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
