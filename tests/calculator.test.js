@@ -60,14 +60,19 @@ describe('3D Printing Cost Calculator Engine', () => {
     assert.ok(solid.machineHours > baseline.machineHours);
   });
 
-  it('should calculate batch production proportionally when quantity > 1', () => {
+  it('should calculate batch production with economies of scale (diluting fixed setup fee)', () => {
     const single = calculate3DPrintCost({ weight: 50, qty: 1, infill: 20, ratePerGram: 0.55 });
     const batch = calculate3DPrintCost({ weight: 50, qty: 10, infill: 20, ratePerGram: 0.55 });
 
+    // Total material and machine hours scale linearly (10x)
     assert.equal(batch.totalWeight, 500);
     assert.equal(batch.materialCost, single.materialCost * 10);
     assert.equal(batch.machineCost, single.machineCost * 10);
-    assert.ok(batch.grandTotal > single.grandTotal * 9);
+
+    // Economies of Scale: Unit price in batch is lower than unit price of a single piece
+    const unitPriceInBatch = batch.grandTotal / 10;
+    assert.ok(unitPriceInBatch < single.grandTotal, 'Unit price in batch must be cheaper than single item');
+    assert.ok(batch.grandTotal > single.grandTotal, 'Batch total must be greater than single item total');
   });
 
   it('should apply higher rates for high-precision resin 8K correctly', () => {
