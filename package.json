@@ -1,0 +1,21 @@
+{
+  "name": "solid-mesh-studio",
+  "version": "1.0.0",
+  "description": "Solid Mesh Studio 3D - Hub de Fabricação Digital & Prototipagem Avançada",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/**/*.test.js",
+    "serve": "npx serve ."
+  },
+  "keywords": [
+    "3d-printing",
+    "digital-fabrication",
+    "additive-manufacturing",
+    "cad",
+    "threejs",
+    "canvas-3d",
+    "clean-architecture"
+  ],
+  "author": "Zeca",
+  "license": "MIT"
+}

@@ -10,6 +10,52 @@ let weightInput, qtyInput, infillSlider, infillDisplay, totalPriceDisplay;
 let summaryMaterial, summaryInfill, summaryWeight, summaryQty, summaryTime;
 let materialButtons;
 
+/**
+ * Pure business logic function for 3D printing cost estimation.
+ * Decoupled from DOM for reliable unit testing and headless calculations.
+ */
+export function calculate3DPrintCost({
+  weight = 10,
+  qty = 1,
+  infill = 20,
+  ratePerGram = 0.45,
+  baseSetupRate = 20.0,
+  machineHourlyRate = 7.5
+} = {}) {
+  const safeWeight = Math.max(1, parseFloat(weight) || 10);
+  const safeQty = Math.max(1, parseInt(qty) || 1);
+  const safeInfill = Math.min(100, Math.max(10, parseInt(infill) || 20));
+  const safeRate = parseFloat(ratePerGram) || 0.45;
+
+  // Infill multiplier adjustment: 20% is baseline 1.0, 100% is 1.5x material
+  const infillFactor = 1 + ((safeInfill - 20) / 160);
+  const effectiveWeight = safeWeight * infillFactor;
+
+  // Machine hourly operational rate: 1 hour roughly per 26g
+  const machineHours = (effectiveWeight / 26) * safeQty;
+  const machineCost = machineHours * machineHourlyRate;
+
+  // Material cost
+  const materialCost = effectiveWeight * safeRate * safeQty;
+
+  // Minimum floor price is R$ 35.00
+  const grandTotal = Math.max(35.0, materialCost + machineCost + baseSetupRate);
+
+  const hours = Math.floor(machineHours);
+  const mins = Math.round((machineHours - hours) * 60);
+
+  return {
+    effectiveWeight,
+    totalWeight: Math.round(effectiveWeight * safeQty),
+    machineHours,
+    machineCost,
+    materialCost,
+    grandTotal: parseFloat(grandTotal.toFixed(2)),
+    formattedTotal: `R$ ${grandTotal.toFixed(2).replace('.', ',')}`,
+    formattedTime: `~ ${Math.max(1, hours)}h ${mins}min`
+  };
+}
+
 export function recalculateQuote() {
   if (!weightInput) return;
 
@@ -17,36 +63,22 @@ export function recalculateQuote() {
   const qty = parseInt(qtyInput.value) || 1;
   const infill = parseInt(infillSlider.value) || 20;
 
-  // Infill multiplier adjustment: 20% is baseline 1.0, 100% is ~1.5x material
-  const infillFactor = 1 + ((infill - 20) / 160);
-  const effectiveWeight = (weight * infillFactor);
-
-  // Machine hourly operational rate: 1 hour roughly per 26g
-  const machineHours = (effectiveWeight / 26) * qty;
-  const machineCost = machineHours * 7.5; // R$ 7,50 machine operational hour
-
-  // Material cost
-  const materialCost = effectiveWeight * currentRate * qty;
-
-  // Base technician setup & QA
-  const baseSetup = 20.0;
-
-  const grandTotal = Math.max(35.0, (materialCost + machineCost + baseSetup));
+  const result = calculate3DPrintCost({
+    weight,
+    qty,
+    infill,
+    ratePerGram: currentRate
+  });
 
   // Update UI Displays
   if (totalPriceDisplay) {
-    totalPriceDisplay.textContent = `R$ ${grandTotal.toFixed(2).replace('.', ',')}`;
+    totalPriceDisplay.textContent = result.formattedTotal;
   }
   if (summaryMaterial) summaryMaterial.textContent = currentMaterialName;
   if (summaryInfill) summaryInfill.textContent = `${infill}% Estrutural`;
-  if (summaryWeight) summaryWeight.textContent = `${Math.round(effectiveWeight * qty)} gramas`;
+  if (summaryWeight) summaryWeight.textContent = `${result.totalWeight} gramas`;
   if (summaryQty) summaryQty.textContent = `${qty} ${qty > 1 ? 'unidades' : 'unidade'}`;
-  
-  if (summaryTime) {
-    const hours = Math.floor(machineHours);
-    const mins = Math.round((machineHours - hours) * 60);
-    summaryTime.textContent = `~ ${Math.max(1, hours)}h ${mins}min`;
-  }
+  if (summaryTime) summaryTime.textContent = result.formattedTime;
 }
 
 /**

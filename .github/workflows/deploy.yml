@@ -47,6 +47,12 @@ jobs:
           node --check js/modules/navbar.js
           echo "✓ Todos os módulos JavaScript são sintaticamente válidos!"
 
+      - name: 🧪 Executar Testes Unitários Automatizados
+        run: |
+          echo "Rodando suíte de testes unitários automatizados..."
+          node --test tests/**/*.test.js
+          echo "✓ Todos os testes unitários passaram com 100% de sucesso!"
+
       - name: 📄 Validar Existência e Estrutura dos Arquivos Críticos
         run: |
           echo "Verificando integridade da árvore de arquivos..."
