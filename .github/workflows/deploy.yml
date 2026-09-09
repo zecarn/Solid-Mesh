@@ -1,0 +1,84 @@
+name: Deploy Solid Mesh Studio to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Permissões necessárias para autenticação OIDC e publicação no GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Permite apenas um deploy simultâneo, enfileirando execuções em andamento
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  # =========================================================================
+  # 1. ETAPA DE QUALIDADE E VALIDAÇÃO (CI - Continuous Integration)
+  # =========================================================================
+  lint-and-validate:
+    name: 🔍 Qualidade & Validação de Código
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Clonar Repositório
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Configurar Node.js para Validação
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 🧪 Validar Sintaxe dos Módulos JavaScript (ES Modules)
+        run: |
+          echo "Iniciando checagem estática dos arquivos JavaScript..."
+          node --check js/main.js
+          node --check js/modules/hero3d.js
+          node --check js/modules/calculator.js
+          node --check js/modules/gallery.js
+          node --check js/modules/contact.js
+          node --check js/modules/navbar.js
+          echo "✓ Todos os módulos JavaScript são sintaticamente válidos!"
+
+      - name: 📄 Validar Existência e Estrutura dos Arquivos Críticos
+        run: |
+          echo "Verificando integridade da árvore de arquivos..."
+          test -f index.html || (echo "Erro: index.html não encontrado" && exit 1)
+          test -f css/theme.css || (echo "Erro: css/theme.css não encontrado" && exit 1)
+          test -f css/styles.css || (echo "Erro: css/styles.css não encontrado" && exit 1)
+          echo "✓ Estrutura de arquivos validada com sucesso!"
+
+  # =========================================================================
+  # 2. ETAPA DE DEPLOY CONTÍNUO (CD - Continuous Deployment)
+  # =========================================================================
+  deploy:
+    name: 🚀 Deploy no GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: lint-and-validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    steps:
+      - name: 📥 Clonar Repositório
+        uses: actions/checkout@v4
+
+      - name: 🌐 Configurar GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📦 Empacotar Artefatos Estáticos
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Faz o upload de todo o diretório do projeto
+          path: '.'
+
+      - name: 🚢 Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
