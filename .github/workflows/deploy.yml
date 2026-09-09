@@ -50,7 +50,7 @@ jobs:
       - name: 🧪 Executar Testes Unitários Automatizados
         run: |
           echo "Rodando suíte de testes unitários automatizados..."
-          node --test tests/**/*.test.js
+          npm test
           echo "✓ Todos os testes unitários passaram com 100% de sucesso!"
 
       - name: 📄 Validar Existência e Estrutura dos Arquivos Críticos

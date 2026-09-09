@@ -4,7 +4,7 @@
   "description": "Solid Mesh Studio 3D - Hub de Fabricação Digital & Prototipagem Avançada",
   "type": "module",
   "scripts": {
-    "test": "node --test tests/**/*.test.js",
+    "test": "node --test",
     "serve": "npx serve ."
   },
   "keywords": [
