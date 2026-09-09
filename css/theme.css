@@ -1,0 +1,41 @@
+/* ==========================================================================
+   Solid Mesh Studio - Theme Variables & Design Tokens
+   ========================================================================== */
+
+:root {
+  --color-cyber-950: #070A0F;
+  --color-cyber-900: #0A0E14;
+  --color-cyber-850: #0D121D;
+  --color-cyber-800: #111722;
+  --color-cyber-700: #1A2332;
+  --color-cyber-600: #253245;
+
+  --color-neon-cyan: #00D9E8;
+  --color-neon-glow: #2DE1F0;
+  --color-neon-blue: #0077FE;
+
+  --color-metal-100: #F1F4F7;
+  --color-metal-200: #E2E8F0;
+  --color-metal-300: #CBD5E1;
+  --color-metal-400: #94A3B8;
+  --color-metal-500: #64748B;
+}
+
+/* Custom Scrollbar for Cyber Theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-cyber-950);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-cyber-700);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neon-cyan);
+}
